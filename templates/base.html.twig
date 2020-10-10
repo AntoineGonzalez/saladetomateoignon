@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="{{ asset("images/kebab_icon.png") }}" />
+        <title>
+            {% block title %}SaladeTomateOignons{% endblock %}
+        </title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/brands.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.css">
+            <link rel="stylesheet" href="{{ asset("css/base.css") }}">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+        {% endblock %}
+    </head>
+    <body>
+        <header>
+            {% block header %}
+                <nav class="navbar fixed-top navbar-expand-lg navbar-light ">
+                    <a class="navbar-brand" href="/"><img src="{{ asset("images/kebab_icon.png") }}"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/">Accueil <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="menus">Les Menus</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="comments">Vos Avis</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="garanties">À Propos</a>
+                            </li>
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="dashboard">Administration</a>
+                            </li>
+                            {% endif %}
+                            </ul>
+                            <form class="form-inline my-2 my-lg-0">
+                                <ul class="navbar-nav mr-auto">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Mon Compte
+                                        </a>
+                                        <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                            {% if app.user %}
+                                                <a class="dropdown-item" href="#">Bonjour {{ app.user.firstname }} !</a>
+                                                <a class="dropdown-item" href="recap"><i class="fas fa-shopping-cart"></i>Mon Panier</a>
+                                                <a class="dropdown-item" href="purshases"><i class="fas fa-list"></i>Mes Commandes</a>
+                                                <a class="dropdown-item" href="myaccount"><i class="fas fa-user-edit"></i>Mes Informations</a>
+                                                <a class="dropdown-item" href="fidelity"><i class="fas fa-donate"></i>Ma Fidélité</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="logout"><i class="fas fa-power-off"></i>Déconnexion</a>
+                                            {% else %}
+                                                <a class="dropdown-item" href="login"><i class="fas fa-power-off"></i>Connexion</a>
+                                            {% endif %}
+                                        </div>
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
+                    </nav>
+            {% endblock %}
+        </header>
+        <main>
+            {% block main %}{% endblock %}
+        </main>
+        <footer>
+            {% block footer %}{% endblock %}
+        </footer>
+
+        {% block javascripts %}
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        	<script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+        {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,20 @@
+.navbar-brand img {
+    height: 70px;
+}
+
+.navbar i {
+    margin-right: 10px;
+}
+
+main {
+    margin-top: 96px;
+}
+
+.navbar {
+    background-color: white;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}

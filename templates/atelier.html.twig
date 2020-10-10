@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset("css/atelier.css") }}">
+{% endblock %}
+
+{% block main %}
+    {{  parent() }}
+
+    <ul>
+        {% for ingredient in ingredients %}
+            <li>{{ ingredient.name }} {{ ingredient.type }}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset("js/atelier.js") }}"></script>
+{% endblock %}

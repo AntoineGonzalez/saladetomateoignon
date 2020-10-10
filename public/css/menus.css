@@ -1,0 +1,162 @@
+@media screen and (min-width: 768px)  {
+    #purshase-container {
+        position: fixed;
+        min-width: 220px;
+        max-width: 220px;
+        left: 100px;
+        top: 110px;
+        bottom: 20px;
+        overflow-y: scroll;
+    }
+
+    .rounded-ctn {
+        width: 100%;
+        height: 100%;
+    }
+
+    #menu-container {
+        margin-left: 350px;
+        margin-right: 10%;
+    }
+}
+
+@media screen and (min-width: 0px) and (max-width: 767px)  {
+    #purshase-container  {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    #menu-container .row {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .beautifull-icon {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 0px) and (max-width: 940px)  {
+    .beautifull-icon {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 0px) and (max-width: 500px)  {
+    .menu-element, .product-element {
+        width: 200px;
+    }
+}
+
+
+
+#supp-title {
+    margin-top: 1em;
+}
+
+#purshase-container h3 {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+#purshase-btn {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.menu-name, .sandwich-name {
+    cursor: pointer;
+    margin-top: 1em;
+}
+
+.sandwich-name:hover {
+    color: black;
+}
+
+.menu-name:hover {
+    color: grey;
+}
+
+.sub-product-container {
+    display: none;
+
+}
+
+.sub-product {
+    font-size: 14px;
+    color: grey;
+    margin-top: 1em;
+    margin-bottom: 0px;
+}
+
+.menu-container {
+    width: 300px;
+}
+
+.menu-element {
+    cursor: pointer;
+}
+
+.row {
+    text-align: center;
+}
+
+.menu-icon, .supr-icon {
+    margin-left: 0.5em;
+}
+
+.menu-icon:hover, .supr-icon:hover {
+    margin-left: 0.5em;
+    color: red;
+    cursor: pointer;
+}
+
+.menu-ctn {
+    margin-top: 1em;
+}
+
+.menu-title {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.menu-title img {
+    max-width: 125px;
+}
+
+/* Style partie suppléments */
+
+#additionals_ctn{
+    margin-bottom: 4em;
+}
+
+#additionals_ctn .title{
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+    padding-top: 0.25em;
+    padding-bottom: 2em;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+}
+
+#additionals_ctn ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#additionals_ctn img{
+    cursor: pointer;
+}
+#accompaniements_ctn img{
+    max-width: 250px;
+}
+
+#drinks_ctn img{
+    max-width: 150px;
+}
+
+

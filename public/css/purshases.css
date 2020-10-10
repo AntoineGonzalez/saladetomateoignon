@@ -1,0 +1,45 @@
+#purshases-table {
+  border: 1px solid grey;
+  margin: 0;
+  padding: 0;
+}
+
+#main-container {
+  padding-top: 2em;
+}
+
+.hidden {
+  display: none;
+}
+
+.detail-ctn, .sub-detail-ctn {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sub-detail-ctn {
+  color : gray;
+  font-size: 14px;
+}
+
+.retractable {
+  font-weight: bold;
+  cursor : pointer;
+}
+
+.retractable:hover {
+  color: grey;
+}
+
+#purshases-table tr {
+  margin: 0;
+  padding: 0;
+}
+
+#purshases-table thead {
+  background-color: #fcd16d;
+  margin:0;
+  padding:0;
+  border-bottom: solid 1px grey;
+}

@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset("css/dashboard.css") }}">
+{% endblock %}
+
+{% block main %}
+    <div class="container text-center">
+        <h1>Nombre total de commandes : {{ purshases_number }}</h1>
+        <table class="table table-dark text-center">
+            <thead>
+                <tr>
+                    <th colspan="3">Résultats globaux - Chiffre d'affaire</th>
+                </tr>
+            </thead>
+                <tr>
+                    <th>Chiffre d'affaires du mois</th>
+                    <th class="month-number"></th>
+                    <th class="previous-month-number"></th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="month-ca"></td>
+                    <td class="previous-month-ca"></td>
+                </tr>
+                <tr>
+                    <th>Chiffre d'affaire de la semaine</th>
+                    <th class="week-number"></th>
+                    <th class="previous-week-number"></th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="week-ca"></td>
+                    <td class="previous-week-ca"></td>
+                </tr>
+            <tr>
+                <th>Chiffres d'affaire de l'année</th>
+                <th class="year-number"></th>
+                <th class="previous-year-number"></th>
+            </tr>
+            <tr>
+                <th>-</th>
+                <td class="year-ca"></td>
+                <td class="previous-year-ca"></td>
+            </tr>
+            <tbody>
+
+            </tbody>
+        </table>
+
+    </div>
+    <div class="container text-center">
+      <svg id="#chart" width="600" height="600"></svg>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent()}}
+  <script type="text/javascript" src="{{ asset("js/moment.js") }}"></script>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script type="text/javascript" src="{{ asset("js/dashboard.js") }}"></script>
+{% endblock %}

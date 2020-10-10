@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset("css/garanties.css") }}">
+{% endblock %}
+
+{% block main %}
+    {{ parent() }}
+    <div class="container text-center">
+        <div class="row">
+            <div class="container text-center">
+                <h1 class="section">Notre boutique</h1>
+                <p>Notre boutique te permet de commander nos delicieux kebabs et burgers qui sauront rassasier ton estomac. Le chef ne travaille qu'avec des produits locaux
+                et de qualité pour le plus grand bonheur de tes papilles.</p>
+                <p>Tu es libre de choisir parmi plusieurs menus que tu pourras le/les accompagner de boissons et de légumes en suppléments.</p>
+                <p>Tu possède également une carte de fidélité en ligne qui calculera automatiquement au bout de 10 commandes, une réduction de 50%.</p>
+                <p>Tu peux choisir de payer en ligne ou en boutique.</p>
+                <p>Petit bonus pour les utilisateurs de discord, rejoins notre serveur et tu pourras passer commande directement depuis la messagerie et connaître l'avancée de ta commande
+                en temps réel. Rejoins-nous <a href="https://discord.gg/FTnKz7d">sur notre serveur</a></p>
+                <p>Tu peux créer un compte <a href="http://saladetomateoignons.ddns.net/signup">ici</a> pour pouvoir commander dès maintenant !</p>
+            </div>
+            <div class="container text-center">
+                <img class="chef-picture" src="{{ asset("images/kebab_chef.png") }} "/>
+            </div>
+            <div class="container text-center">
+                <h1 class="section">Les 5 commandements du kebab</h1>
+                <p>1. Kebab tu commanderas, kebab tu termineras</p>
+                <p>2. Sauce blanche tu choisiras, bénis tu seras</p>
+                <p>3. "Chef" tu m'appeleras</p>
+                <p>4. En avance tu commanderas</p>
+                <p>5. Avec les doigts tu mangeras</p>
+                <p>6. En sortie de discothèque tu me prendra</p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

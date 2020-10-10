@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset("css/fidelity.css") }}">
+{% endblock %}
+
+{% block main %}
+    {{  parent() }}
+    <div id="main-container" class="container text-center">
+        <p> Bienvenue  dans votre espace fidélité ! Cumulez un point de fidélité à chaque commande passée d'un montant supérieur à 10 euros. Au bout de 9 points cumulés économiser 50% sur le prix de votre prochaine commande! </p>
+        <img id="fidelity-card" src="{{ asset("skins/fidelity/fidelity_card_" ~ ( fidelityCount%10 ) ~ ".png" )}}" />
+        {% if fidelityCount is divisible by(9) and fidelityCount !=0 %}
+            <p> Votre carte est complétée ! vous gangnez 50 % de remise sur votre prochaine commande.</p>
+        {% else %}
+            <p> {{ 9-fidelityCount%10 }} point(s) manquant(s) avant votre prochaine remise.</p>
+        {% endif %}
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

@@ -1,0 +1,47 @@
+{% apply inline_css %}
+    <div class="main-container">
+      <p>{{ user.firstname }} !</p>
+
+      <p> Le status de ta commande a changé ! </p>
+      <p> Nouveau status : {{ status }} </p>
+
+      <img src="{{ email.image('@images/kebab_chef_min.png') }}" alt="Logo">
+
+      <p>A bientôt !<p>
+    </div>
+
+    <style>
+        {# here, define your CSS styles as usual #}
+        .content {
+            margin-left: 2em;
+            margin-right: 2em;
+            text-align: center;
+            border: 1px solid black;
+            font-size: 18px;
+        }
+        .content-type {
+          font-weight: bold;
+          text-decoration: underline;
+        }
+        .sub-product {
+
+        }
+        .ingredients {
+          font-size: 13px;
+          font-style: italic;
+          color: grey;
+        }
+        .menu-name {
+          font-weight: bold;
+        }
+        .main-container {
+          text-align: center;
+        }
+        img {
+          width: 200px;
+        }
+        div {
+          text-align: center;
+        }
+    </style>
+{% endapply %}

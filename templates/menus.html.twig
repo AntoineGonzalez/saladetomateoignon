@@ -1,0 +1,233 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset("css/menus.css") }}">
+{% endblock %}
+
+{% block main %}
+    {{ parent() }}
+    <div>
+        <div class="row">
+            <div id="purshase-container" class="font-weight-bold  col-md-12">
+                <div class="rounded-ctn border rounded border-warning">
+                    <h3 class="font-weight-bold border-secondary border-bottom">Ma commande</h3>
+                    <h4 class="font-weight-bold menu-list">Menus</h4>
+                    {% for menu in shopbag["menu"] %}
+                        <div class="menu-ctn">
+                            <span class="menu-name">1x {{ menu.formule.name }} - {{ menu.formule.price }}€</span><i
+                                    data-menu-index="{{ loop.index - 1 }}" class="menu-icon fas fa-minus"></i>
+                        </div>
+                        <div class="sub-product-container">
+                            {% for product in menu.content %}
+                                {% if product.category.name == "sandwich" %}
+                                    {% set contentString = '' %}
+                                    {% for ingredient in product.ingredients %}
+                                        {% if ingredient.type != "pain" %}
+                                            {% if loop.index == 1 %}
+                                                {% if loop.index ==  product.ingredients|length %}
+                                                    {% set contentString = contentString ~ "( " ~ ingredient.name ~ " )" %}
+                                                {% else %}
+                                                    {% set contentString = contentString ~ "( " ~ ingredient.name ~ " - "%}
+                                                {% endif %}
+                                            {% elseif loop.index ==  product.ingredients|length %}
+                                                {% set contentString = contentString ~ ingredient.name ~ " )" %}
+                                            {% else %}
+                                                {% set contentString = contentString ~ ingredient.name ~ " - " %}
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    <p class="sub-product sandwich-name" data-toggle="tooltip" data-placement="top" title="{{ contentString }}">- {{ product.name }}</p>
+                                    <!-- <p>{{ contentString }}</p> -->
+                                {% else %}
+                                    <p class="sub-product">- {{ product.name }}</p>
+                                {% endif %}
+
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+
+                    <h4 id="supp-title" class="font-weight-bold">Suppléments</h4>
+                    <div id="supp_ctn">
+                        {% for purshaseProduct in shopbag["supplement"] %}
+                            <div class="add-product-ctn">
+                                <span class="sub-product">1x {{ purshaseProduct.product.name }} - {{ purshaseProduct.product.price }}€</span><i
+                                        data-menu-index="{{ loop.index - 1 }}" class="supr-icon fas fa-minus"></i>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <a id="purshase-btn" href="recap" class="btn btn-primary">Commander</a>
+                </div>
+            </div>
+            <div id="menu-container" class="col-sm">
+                <div class="row menu-title rounded border font-weight-bold border-warning">
+                    <img class="beautifull-icon col-sm" src="{{ asset("images/kebab_ic.jpg") }}">
+                    <h1 class="col-sm font-weight-bold ">Nos Menus Kebab</h1>
+                    <img class="beautifull-icon col-sm" src="{{ asset("images/kebab_ic.jpg") }}">
+                </div>
+                <div class="row">
+                    {% for i in range(0, 1) %}
+                        <div class="col-sm">
+                            <div class="container menu-container">
+                                <div class="row">
+                                    <img class="menu-element" data-menu-id="{{ menus[i].id }}"
+                                         src="{{ asset(menus[i].picture) }}" alt="Can't display">
+                                </div>
+                                <div class="row justify-content-center">
+                                    {{ menus[i].name }} à {{ menus[i].price }} euros
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="row menu-title rounded border border-warning">
+                    <img class="beautifull-icon col-sm" src="{{ asset("images/burger_icon.jpg") }}">
+                    <h1 class="col-sm font-weight-bold ">Nos Menus Burgers</h1>
+                    <img class="beautifull-icon col-sm" src="{{ asset("images/burger_icon.jpg") }}">
+                </div>
+                <div class="row">
+                    {% for i in range(2, 3) %}
+                        <div class="col-sm">
+                            <div class="container menu-container">
+                                <div class="row">
+                                    <img class="menu-element" data-menu-id="{{ menus[i].id }}"
+                                         src="{{ asset(menus[i].picture) }}" alt="Can't display">
+                                </div>
+                                <div class="row justify-content-center">
+                                    {{ menus[i].name }} à {{ menus[i].price }} euros
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="row">
+                    {% for i in range(4, 5) %}
+                        <div class="col-sm">
+                            <div class="container menu-container">
+                                <div class="row">
+                                    <img class="menu-element" data-menu-id="{{ menus[i].id }}"
+                                         src="{{ asset(menus[i].picture) }}" alt="Can't display">
+                                </div>
+                                <div class="row justify-content-center">
+                                    {{ menus[i].name }} à {{ menus[i].price }} euros
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+
+                <!-- Partie reservé aux suppléments -->
+
+
+                <div id="additionals_ctn">
+
+                    <div class="row menu-title rounded border font-weight-bold border-warning">
+                        <img class="beautifull-icon col-sm" src="{{ asset("images/additional.png") }}">
+                        <h1 class="beautifull-icon col-sm font-weight-bold ">Nos Suppléments</h1>
+                        <img class="beautifull-icon col-sm" src="{{ asset("images/additional.png") }}">
+                    </div>
+
+                    <!-- Partie reservé aux accompagnements -->
+                    <h1 class="title">Nos Accompagments</h1>
+                    <div id="accompaniements_ctn" class="row">
+
+                        {% for accompaniement in accompaniements %}
+                            <div class="col-sm">
+                                <img class="product-element" data-product-id="{{ accompaniement.id }}"
+                                     src="{{ asset(accompaniement.picture) }}" alt="Can't display">
+                                <div class="justify-content-center">
+                                    {{ accompaniement.name }} à {{ accompaniement.price }} euros
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Partie reservé aux boissons -->
+                    <h1 class="title">Nos Boissons</h1>
+                    <div id="drinks_ctn" class="row">
+                        {% for drink in drinks %}
+                            <div class="col-sm">
+                                <img class="product-element" data-product-id="{{ drink.id }}"
+                                     src="{{ asset(drink.picture) }}" alt="Can't display">
+                                <div class="justify-content-center">
+                                    {{ drink.name }} à {{ drink.price }} euros
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="custom-menu-modal" tabindex="-1" role="dialog" aria-labelledby="menu-modal"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="menu-modal"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <label class="col-sm" for="drink">Boisson</label>
+                        </div>
+                        <div class="row">
+                            <select class="drink-select col-sm" name="drink-select">
+                                {% for drink in drinks %}
+                                    <option value="{{ drink.id }}"> {{ drink.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm" for="Composition">Composition</label>
+                        </div>
+                        <div id="checkbox_ingredients_ctn" class="row" >
+                        </div>
+                        <div class="row">
+                            <label class="col-sm" for="drink">Sauce</label>
+                        </div>
+                        <div class="row">
+                            <select class="sauce-select col-sm" name="sauce-select">
+                                {% for sauce in sauces %}
+                                    <option value="{{ sauce.id }}"> {{ sauce.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm">Accompagnement</label>
+                        </div>
+                        <div class="row">
+                            <select class=" col-sm accompagnement-select" name="accompagnement-select">
+                                {% for accompaniement in accompaniements %}
+                                    <option value="{{ accompaniement.id }}"> {{ accompaniement.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm">Petit mot pour le chef !</label>
+                        </div>
+                        <div class="row">
+                            <textarea id="comment" class="col-sm" name="word"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="cancel" type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button id="addToCommand" type="button" class="btn btn-primary">Ajouter à la commande</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset("js/menus.js") }}"></script>
+{% endblock %}

@@ -1,0 +1,92 @@
+#payment-form, #card-element {
+    display: none;
+}
+
+#loader {
+    display: none;
+}
+
+#pay-now, #pay-after {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+#card-errors {
+    margin-top: 1em;
+    display: none;
+}
+
+#card-success {
+    margin-top: 1em;
+    display: none;
+}
+
+#submit {
+    margin-bottom: 1em;
+    margin-top: 1em;
+    font-weight: bold;
+    border: 1px solid grey;
+}
+
+#card-element {
+    border: 1px solid grey;
+    padding: 1em 1em 1em 1em;
+}
+
+#purshase-recap-container {
+    padding-bottom: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    border: 1px solid grey;
+}
+
+.discount {
+    margin-top: 1em;
+    padding-bottom: 1em;
+    padding-top: 1em;
+    color: red;
+    font-weight: bold;
+    border: 1px solid red;
+}
+
+#main-container {
+    margin-top: 8em;
+}
+
+.title:first-child{
+    margin-top :0;
+    border-top: none;
+}
+
+.title{
+    margin-top: 1em;
+    margin-bottom: 1em;
+    background-color: #fcd16d;
+    padding: 0.25em;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+}
+
+.retractable {
+    font-weight: bold;
+    cursor : pointer;
+}
+
+.detail-ctn, .sub-detail-ctn {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sub-detail-ctn {
+    color : gray;
+    font-size: 14px;
+}
+
+.hidden {
+    display: none;
+}
+
+.retractable:hover {
+    color: grey;
+}

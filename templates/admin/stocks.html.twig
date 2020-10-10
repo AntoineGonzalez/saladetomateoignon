@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Stocks
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset("css/stocks.css") }}">
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Ingrédient</th>
+            <th>Quantité</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for ingredient in ingredients %}
+          <tr>
+            <td>{{ ingredient.name}}</td>
+            <td>{{ ingredient.stockQty }}</td>
+            {% if ingredient.stockQty < 10 %}
+              <td class="low-qty"></td>
+            {% elseif ingredient.stockQty < 20 %}
+              <td class="medium-qty"></td>
+            {% else %}
+              <td class="high-qty"></td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+{% endblock %}

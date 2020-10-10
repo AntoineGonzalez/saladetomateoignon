@@ -1,0 +1,29 @@
+p {
+    font-weight: bold;
+}
+
+#fidelity-card{
+    max-width : 800px;
+}
+
+#main-container {
+    padding-top: 2em;
+}
+
+@media screen and (min-width: 300px) and (max-width: 599px) {
+    #fidelity-card {
+        max-width: 280px;
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 799px) {
+    #fidelity-card {
+        max-width: 400px;
+    }
+}
+
+@media screen and (min-width: 800px) and (max-width: 1000px) {
+    #fidelity-card {
+        max-width: 600px;
+    }
+}

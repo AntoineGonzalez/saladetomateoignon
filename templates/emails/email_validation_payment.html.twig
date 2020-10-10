@@ -1,0 +1,83 @@
+{% apply inline_css %}
+    <div class="main-container">
+      <p>Bonjour {{ user.firstname }} !</p>
+
+      <p> Merci pour ta commande du {{ date | date("m/d/Y") }} ! </p>
+
+      <p>Le chef la prépare pour {{ purchase_hour }} !</p>
+
+      <img src="{{ email.image('@images/kebab_chef_min.png') }}" alt="Logo">
+
+      <div class="content">
+        <p class="content-type">Menus</p>
+        {% for menu in menus %}
+          <p class="menu-name">Menu {{ menu.formule.name }}</p>
+          {% for product in menu.content %}
+            <p class="sub-product">- {{ product.name }}</p>
+            {% set contentString = '' %}
+            {% for ingredient in product.ingredients %}
+                {% if ingredient.type != "pain" %}
+                    {% if loop.index == 1 %}
+                        {% if loop.index ==  product.ingredients|length %}
+                            {% set contentString = contentString ~ "(" ~ ingredient.name ~ ")" %}
+                        {% else %}
+                            {% set contentString = contentString ~ "(" ~ ingredient.name ~ " - "%}
+                        {% endif %}
+                    {% elseif loop.index ==  product.ingredients|length %}
+                        {% set contentString = contentString ~ ingredient.name ~ ")" %}
+                    {% else %}
+                        {% set contentString = contentString ~ ingredient.name ~ " - " %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            <p class="ingredients">{{ contentString }}</p>
+          {% endfor %}
+        {% endfor %}
+
+        <hr>
+
+        <p class="content-type">Suppléments</p>
+        {% for supplement in supplement %}
+          <p class="sub-product">- {{ supplement.qty }}x {{ supplement.product.name }}</p>
+        {% endfor %}
+
+        <p>Montant total : {{ total }}€</p>
+      </div>
+      <p>A tout de suite !<p>
+    </div>
+
+    <style>
+        {# here, define your CSS styles as usual #}
+        .content {
+            margin-left: 2em;
+            margin-right: 2em;
+            text-align: center;
+            border: 1px solid black;
+            font-size: 18px;
+        }
+        .content-type {
+          font-weight: bold;
+          text-decoration: underline;
+        }
+        .sub-product {
+
+        }
+        .ingredients {
+          font-size: 13px;
+          font-style: italic;
+          color: grey;
+        }
+        .menu-name {
+          font-weight: bold;
+        }
+        .main-container {
+          text-align: center;
+        }
+        img {
+          width: 200px;
+        }
+        div {
+          text-align: center;
+        }
+    </style>
+{% endapply %}

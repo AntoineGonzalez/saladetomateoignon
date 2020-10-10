@@ -1,0 +1,89 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset("css/purshases.css") }}">
+{% endblock %}
+
+{% block main %}
+    {% set waiting = "En attente de validation" %}
+    {% set canceled = "Commande refusée" %}
+    {% set delivered = "Commande récupérée" %}
+    {% set in_preparation = "En cours de préparation" %}
+    {% set ready = "Commande préparée" %}
+    {% set validate = "Commande validée" %}
+
+    {{ parent() }}
+    <div id="main-container" class="container text-center">
+        {% for purshase in purshases %}
+            <table id="purshases-table" class="col-sm">
+                <thead>
+                    <tr class="row mt-1">
+                        <th class="col-sm">Référence de la commande</th>
+                        <th class="col-sm">Date</th>
+                        <th class="col-sm">Menus</th>
+                        <th class="col-sm">Suppléments</th>
+                        <th class="col-sm">Total</th>
+                        <th class="col-sm">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="row mt-2 mb-2">
+                        <td class="col-sm">{{ purshase.id }}</td>
+                        <td class="col-sm">{{ purshase.date | date("m/d/Y \\à\\ H:i") }}</td>
+                        <td class="col-sm">
+                            {% for menu in purshase.purshaseMenuses %}
+                                <ul class="detail-ctn">
+                                    <li>
+                                        <span class="retractable"> 1x {{ menu.formule.name }} - {{ menu.formule.price }} € </span>
+                                        <ul class="sub-detail-ctn hidden">
+                                            {% for product in menu.content %}
+                                                <li> {{ product.name }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                </ul>
+                            {% endfor %}
+
+                        </td>
+                        <td class="col-sm">
+                            {% for purshaseProduct in purshase.purshaseProducts %}
+                                <ul class="detail-ctn">
+                                    <li> {{purshaseProduct.qty}}x {{ purshaseProduct.product.name }} - {{ purshaseProduct.product.price }} €</li>
+                                </ul>
+                            {% endfor %}
+                        </td>
+                        <td class="col-sm">{{ total[purshase.id] }} €</td>
+                        <td class="col-sm">
+                            {% if purshase.status == "waiting" %}
+                                {{ waiting }}
+                            {% elseif purshase.status == "canceled" %}
+                                {{ canceled }}
+                            {% elseif purshase.status == "delivered" %}
+                                {{ delivered }}
+                            {% elseif purshase.status == "in_preparation" %}
+                                {{ in_preparation }}
+                            {% elseif purshase.status == "ready" %}
+                                {{ ready }}
+                            {% elseif purshase.status == "validate" %}
+                                {{ validate }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        {% endfor %}
+
+        {% if purshases is empty %}
+            <p> Vous n'avez passé aucune commande. </p>
+            <p> Commander pour la première fois en un <a href="menus">click</a>!</p>
+        {% endif %}
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://js.stripe.com/v3/"></script>
+    <script type="text/javascript" src="{{ asset("js/purchases.js") }}"></script>
+{% endblock %}

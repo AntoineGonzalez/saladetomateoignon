@@ -1,0 +1,76 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset("css/recap.css") }}">
+{% endblock %}
+
+{% block main %}
+    {{  parent() }}
+
+    <div id="main-container" class="container text-center">
+        {% if total == 0 %}
+          <h2>Ton panier est vide..</h2>
+          <h3>Ne perds pas plus de temps et commande ton menu <a href="menus">ici</a> !</h3>
+        {% else %}
+          <h1>Récapitulatif de la commande</h1>
+          <div id="purshase-recap-container">
+              <h4 class="font-weight-bold title">Menus</h4>
+              {% for menu in shopbag["menu"] %}
+                  <ul class="detail-ctn">
+                      <li>
+                          <span class="retractable"> 1x {{ menu.formule.name }} - {{ menu.formule.price }} € </span>
+                          <ul class="sub-detail-ctn hidden">
+                              {% for product in menu.content %}
+                                  <li> {{ product.name }}</li>
+                              {% endfor %}
+                          </ul>
+                      </li>
+                  </ul>
+              {% endfor %}
+
+              <h4 class="title font-weight-bold">Suppléments</h4>
+
+              {% for purshasedProduct in shopbag["supplement"] %}
+                  <ul class="detail-ctn">
+                      <li> 1x {{ purshasedProduct.product.name }} - {{ purshasedProduct.product.price }}€</li>
+                  </ul>
+              {% endfor %}
+          </div>
+
+          <label for="delivery">Heure de préparation souhaitée : </label>
+          <input type="time" id="delivery" name="delivery" min="09:00" max="23:00" required>
+
+          <button data-customer-id="{{ app.user.id }}" data-customer-mail="{{ app.user.email }}" class="btn btn-lg btn-primary col-sm" id="pay-after">Payer en restaurant</button>
+          <button data-customer-id="{{ app.user.id }}" data-customer-mail="{{ app.user.email }}" class="btn btn-lg btn-primary col-sm" id="pay-now">Payer en carte bancaire</button>
+          <form id="payment-form">
+              <div id="card-element">
+                  <!-- Elements will create input elements here -->
+              </div>
+
+              <!-- We'll put the error messages in this element -->
+              <div id="card-errors" class="alert alert-danger" role="alert"></div>
+              <div id="card-success" class="alert alert-success" role="alert"></div>
+
+              {% if app.user.fidelityPoint is divisible by(9) and app.user.fidelityPoint !=0 %}
+                <div class="discount">50% de réduction sur cette commande !</div>
+              {% endif %}
+
+              <button data-customer-id="{{ app.user.id }}" data-customer-mail="{{ app.user.email }}" data-secret="{{ client_secret }}" class="btn btn-lg btn-primary col-sm" type="submit" id="submit">Payer {{ total }}€</button>
+          </form>
+
+          <div class="row justify-content-center">
+              <div id="loader" class="spinner-border text-primary" role="status">
+                <span class="sr-only">Redirection...</span>
+              </div>
+          </div>
+        {% endif %}
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://js.stripe.com/v3/"></script>
+    <script type="text/javascript" src="{{ asset("js/recap.js")}}"></script>
+{% endblock %}

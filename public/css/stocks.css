@@ -1,0 +1,11 @@
+.low-qty {
+  background-color: red;
+}
+
+.medium-qty {
+  background-color: orange;
+}
+
+.high-qty {
+  background-color: green;
+}
